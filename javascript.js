@@ -1,7 +1,37 @@
-function playGame() {
+
+const results = document.querySelector("#results");
+const roundResult = document.createElement("h3");
+roundResult.textContent = "Here you will see how things are going";
+results.appendChild(roundResult);
+
+const gameResult = document.createElement("p");
+gameResult.textContent = "Current score is: Human 0 - Computer 0";
+results.appendChild(gameResult);
+
+const rock = document.querySelector("#rock")
+   function rockFunction(){
+      playRound("rock", getComputerChoice())
+   }
+rock.addEventListener("click", rockFunction);
+
+
+const paper = document.querySelector("#paper")
+   function paperFunction(){
+      playRound("paper", getComputerChoice());
+   }
+paper.addEventListener("click", paperFunction);
+
+const scissors = document.querySelector("#scissors")
+   function scissorFunction(){
+      playRound("scissors", getComputerChoice());
+   }
+scissors.addEventListener("click", scissorFunction);
+
+
    let humanScore = 0;
    let computerScore = 0;
    let numberOfRounds = 0;
+
    function playRound(humanChoice, computerChoice)
    {
    let result = "none";
@@ -39,42 +69,51 @@ function playGame() {
           humanScore++;
        }
     }
-   return result;
+    numberOfRounds += 1;
+    roundResult.textContent = result;
+    gameResult.textContent = ("This is round " +
+                               numberOfRounds + 
+                              ". The current score is: Human " + 
+                              humanScore+ 
+                              " - Computer "
+                              +computerScore);
+   checkScore();
 }
 
-   if (computerScore < humanScore){
-      window.alert("Computer score is: " + computerScore + ". Your score is: " + humanScore + ". Congratulations you won the game!");
-   }
-   else if (computerScore > humanScore){
-      window.alert("Computer score is: " + computerScore + ". Your score is: " + humanScore + ". Ouch! Looks like you lost the game. Try again.");
-   }
-
-   else {
-      window.alert("Computer score is: " + computerScore + ". Your score is: " + humanScore + ". This game ended in a draw, try again!");
+function checkScore() {
+   if (humanScore == 3){
+        roundResult.textContent = "Final score: Human " + humanScore + " Computer: " + computerScore + ". You Win!";
+        gameResult.textContent = "Wanna have another try? Click on the buttons";
+        humanScore = 0; 
+        computerScore = 0; 
+        numberOfRounds = 0; 
+      }
+   else if (computerScore == 3){
+         roundResult.textContent = "Final score: Human " + humanScore + " Computer: " + computerScore + ". You Lose!";
+         gameResult.textContent = "Wanna have another try? Click on the buttons";
+         humanScore = 0; 
+        computerScore = 0; 
+        numberOfRounds = 0; 
+      }
    }
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
- function getPlayerChoice() {
-   let choice = window.prompt("Rock, Paper or scissors? Make your choice");
-   let lowerCaseChoice = choice.toLowerCase(choice);
-   return lowerCaseChoice;
- }
-    
+ 
 function getComputerChoice()
 {
     let index = getRandomInt(3);
     let result = "none";
     
    if (index == 0){
-        result = "Scissors";
+        result = "scissors";
     }
     else if(index == 1) {
-       result = "Rock";
+       result = "rock";
     }
     else {
-       result = "Paper";
+       result = "paper";
     }
     return result;
 }
