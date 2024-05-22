@@ -4,8 +4,6 @@ function playGame() {
    let numberOfRounds = 0;
    function playRound(humanChoice, computerChoice)
    {
-   computerChoice = getComputerChoice().toLowerCase();
-   humanChoice = getPlayerChoice().toLowerCase();
    let result = "none";
    if (computerChoice === humanChoice) {
       result = "This round is a draw! Play again";
@@ -41,14 +39,8 @@ function playGame() {
           humanScore++;
        }
     }
-   numberOfRounds ++;
-   window.alert(result);
    return result;
 }
-   while (numberOfRounds < 5 && humanScore < 3 && computerScore < 3) 
-   {
-      playRound();
-   }
 
    if (computerScore < humanScore){
       window.alert("Computer score is: " + computerScore + ". Your score is: " + humanScore + ". Congratulations you won the game!");
@@ -60,9 +52,6 @@ function playGame() {
    else {
       window.alert("Computer score is: " + computerScore + ". Your score is: " + humanScore + ". This game ended in a draw, try again!");
    }
-}
-
-playGame();
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
@@ -72,8 +61,6 @@ function getRandomInt(max) {
    let lowerCaseChoice = choice.toLowerCase(choice);
    return lowerCaseChoice;
  }
-
-/*console.log(getPlayerChoice());*/
     
 function getComputerChoice()
 {
